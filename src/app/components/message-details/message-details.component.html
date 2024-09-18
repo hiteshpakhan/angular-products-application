@@ -1,0 +1,10 @@
+<div style="width: 120px; margin: 10px; padding: 10px; background-color: #f7f7f7; border-radius: 4px; border: 1px solid #ccc;">
+    <div style="background-color: #4caf50; color:white; padding: 10px; border-radius: 4px 4px 0 0;">
+        <h3>{{message.name}}</h3>
+        <p>{{message.email}}</p>
+    </div>
+    <div style="padding: 10px; border-radius: 0 0 4px 4px;">
+        <p>{{message.message}}</p>
+    </div>
+    <button type="button" (click)="onDelete()">Delete</button>
+</div>

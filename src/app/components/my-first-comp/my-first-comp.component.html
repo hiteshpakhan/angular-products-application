@@ -1,0 +1,65 @@
+<div style="max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f7f7f7;">
+    <h2 style="text-align: center;">Simple form</h2>
+    <form (ngSubmit)="onSubmit()">
+    <!-- <form> -->
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; font-weight: bold;" for="name">Name:</label>
+            <input
+            [(ngModel)]="name" 
+            name="name"
+            style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" id="name" type="text">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; font-weight: bold;" for="email">Email:</label>
+            <input [(ngModel)]="email" 
+            name="email"
+            style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" id="email" type="email">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; font-weight: bold;" for="mesage">Message:</label>
+            <textarea [(ngModel)]="message"
+            name="message"
+            style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" rows="4" id="message"></textarea>
+        </div>
+        <button style="display: block; margin: auto; background-color: #4caf50; color: white; border: none; border-radius: 4px; cursor: pointer; padding: 10px 20px;" type="submit">Submit</button>
+    </form>
+    
+    <div *ngIf="isSubmitted">
+
+        <select name="demo" [(ngModel)]="visualChange" >
+            <option>hide</option>
+            <option name="card" value="card" selected="selected" >Card</option>
+            <option name="table" value="table">table</option>
+        </select>
+
+        <div *ngIf="visualChange === 'table'">
+            <table style="max-width: 400px; margin: auto;">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Maessge</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let msg of messages, let i = index">
+                        <td style="max-width: 20%;padding: 3px;">{{msg.name}}</td>
+                        <td style="max-width: 20%;padding: 3px;">{{msg.email}}</td>
+                        <td style="max-width: 20%;padding: 3px;">{{msg.message}}</td>
+                        <td style="max-width: 20%;padding: 3px;"><button type="button" (click)="onDeleteButton(i)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div  *ngIf="visualChange === 'card'" style="display: flex; flex-direction: row; justify-content: space-between; flex-wrap: wrap;">
+            <app-message-details 
+            *ngFor="let msg of messages; let i = index;"
+            [message]="msg" 
+            [index]="i"
+            (delete)="deleteData($event)" ></app-message-details>
+        </div>
+    </div>
+
+</div>
+
